@@ -1,0 +1,62 @@
+<h2>Description</h2>
+
+<p>Lists are really useful! For example, imagine yourself going to a grocery shop, I bet you would probably write some kind of a list of products you need to remember to buy. In markdown lists are as simple as they are in the example; actually, there only two different kinds: <em>ordered</em> and <em>unordered</em>. I think you've already guessed that the difference between them is that an <em>ordered </em>list enumerates its elements (<em>1.</em>, <em>2.</em>, <em>3.</em>, and so on) and an <em>unordered</em> doesn't.</p>
+
+<p>Remember those <em><strong>ordered</strong></em> and <em><strong>unordered</strong></em> list formatters we skipped in the last stage? Well, let's get back to them now!</p>
+
+<h2>Objectives</h2>
+
+<p>The goal is to implement the <strong><em>ordered</em></strong> and <strong><em>unordered</em></strong> list formatters. You may separate the implementation into two different functions for each of the formatters, but I suggest keeping them in one: try to get an idea on how to do it!</p>
+
+<p>For both of them the following inputs are required:</p>
+
+<pre>	<code class="language-no-highlight">- Number of rows: &gt; 3
+- Row #1: &gt; First element
+- Row #2: &gt; Second element
+- Row #3: &gt; Third element</code>
+</pre>
+
+<p>Don't forget to check if the number of rows is less or equal to zero! If it is invalid print the corresponding error: <em>The number of rows should be greater than zero</em></p>
+
+<h2>Examples</h2>
+
+<p>A working session with the tool might look like this after completing this stage. Notice that the formatters automatically add a <em><strong>new-line</strong></em></p>
+
+<pre>	<code class="language-no-highlight">$ python markdown-editor.py
+Choose a formatter: &gt; ordered-list
+- Number of rows: &gt; 3
+- Row #1: &gt; First element
+- Row #2: &gt; Second element
+- Row #3: &gt; Third element
+1. First element
+2. Second element
+3. Third element
+
+Choose a formatter: &gt; unordered-list
+- Number of rows: &gt; 2
+- Row #1: &gt; Fourth element
+- Row #2: &gt; Fifth element
+1. First element
+2. Second element
+3. Third element
+* Fourth element
+* Fifth element
+
+Choose a formatter: &gt; unordered-list
+- Number of rows: &gt; -2
+The number of rows should be greater than zero
+&gt;&gt; Number of rows: 2
+&gt;&gt; Row #1: Sixth element
+&gt;&gt; Row #2: Seventh element
+1. First element
+2. Second element
+3. Third element
+* Fourth element
+* Fifth element
+* Sixth element
+* Seventh element
+
+&gt; Choose a formatter: !done</code>
+</pre>
+
+<p>The tool should also recognize the formatters that were implemented in the previous stages, and be a modification of the code you already have</p>

@@ -1,0 +1,77 @@
+<h2>Description</h2>
+
+<p>Congratulations! You've made it to the most interesting part of the project — you will now start implementing the formatters that we have discussed before. For your convenience, I will paste the list from the previous stage here:</p>
+
+<ul>
+	<li>plain</li>
+	<li><strong>bold</strong>/<em>italic</em></li>
+	<li>inline-code</li>
+	<li>link</li>
+	<li>header</li>
+	<li>new-line</li>
+</ul>
+
+<p>We won't consider <em><strong>ordered</strong></em> and <em><strong>unordered</strong></em> lists now, but you'll get to them in the next stage!</p>
+
+<h2>Objectives</h2>
+
+<p>You have to make your program recognize the above-mentioned formatters. I suggest implementing a separate function for each of them — it is a good practice to keep your code structured, and it will be easy to find a bug if something doesn't work as intended. </p>
+
+<p>It should work the following way:</p>
+
+<ol>
+	<li>A user types in a formatter</li>
+	<li>If the formatter doesn't exist, the editor should print the corresponding error: <em>Unknown formatter or command. Please try again</em></li>
+	<li>The user is asked to type some input requested by the formatter: <code>&gt; Text: &lt;user's input&gt;</code> </li>
+	<li>Your program saves the text with the chosen formatter applied to it and prints the whole markdown</li>
+</ol>
+
+<p>Notice that different formatters may ask a user to type different input.</p>
+
+<p>For <em><strong>new-line, </strong></em>nothing is required to input</p>
+
+<p>For <strong><em>plain</em></strong>, <strong><em>bold</em></strong>, <strong><em>italic</em></strong>, and <em><strong>inline-code,</strong> </em>only text is required</p>
+
+<pre>	<code class="language-no-highlight">-- Text: &gt; Some text</code>
+</pre>
+
+<p>For <em><strong>header,</strong> </em>a level and text are required. Don't forget to check that the level is within the range from 1 to 6. If it violates this rule, print the corresponding error: <em>Level should be within the range from 1 to 6</em></p>
+
+<pre>	<code class="language-no-highlight">-- Level: &gt; 4
+-- Text: &gt; Hello World!</code>
+</pre>
+
+<p>For <strong><em>link,</em></strong> a label and a URL are required</p>
+
+<pre>	<code class="language-no-highlight">-- Label: &gt; Tutorial
+-- URL: &gt; https://www.markdownguide.org/basic-syntax/</code>
+</pre>
+
+<h2>Examples</h2>
+
+<p>A working session with the tool might look like this after completing this stage. Notice that the <strong><em>header</em> </strong>formatter automatically adds a <em><strong>new-line</strong></em></p>
+
+<pre>	<code class="language-no-highlight">$ python markdown-editor.py
+Choose a formatter: &gt; non-existing-formatter
+Unknown formatter or command. Please try again
+Choose a formatter: &gt; header
+- Level: &gt; 4
+- Text: &gt; Hello World!
+#### Hello World!
+
+Choose a formatter: &gt; plain
+- Text: &gt; Some plain text
+#### Hello World!
+Some plain text
+Choose a formatter: &gt; new-line
+#### Hello World!
+Some plain text
+
+Choose a formatter: &gt; link
+- Label: &gt; Tutorial
+- URL: &gt; https://www.markdownguide.org/basic-syntax/
+#### Hello World!
+Some plain text
+[Tutorial](https://www.markdownguide.org/basic-syntax/)
+Choose a formatter: &gt; !done</code>
+</pre>
