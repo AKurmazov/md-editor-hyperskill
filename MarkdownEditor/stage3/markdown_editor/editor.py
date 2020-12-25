@@ -15,12 +15,12 @@ def done():
 def format_header():
     global MD
 
-    level = int(input('- Level: > '))
+    level = int(input('- Level: '))
     if level not in list(range(1, 7)):
         print('Level should be within the range from 1 to 6')
         format_header()
     else:
-        text = input('- Text: > ')
+        text = input('- Text: ')
 
         MD += '#' * level + f' {text}\n'
 
@@ -28,8 +28,8 @@ def format_header():
 def format_link():
     global MD
 
-    label = input('- Label: > ')
-    url = input('- URL: > ')
+    label = input('- Label: ')
+    url = input('- URL: ')
 
     MD += f'[{label}]({url})'
 
@@ -37,7 +37,7 @@ def format_link():
 def format_plain(extra=''):
     global MD
 
-    text = input('- Text: > ')
+    text = input('- Text: ')
 
     MD += f'{extra}{text}{extra}'
 
@@ -78,7 +78,7 @@ def query_input(message):
 
 
 def main():
-    query_input("- Choose a formatter: > ")
+    query_input("- Choose a formatter: ")
 
 
 main()
