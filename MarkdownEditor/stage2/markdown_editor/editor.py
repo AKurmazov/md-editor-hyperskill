@@ -47,7 +47,7 @@ def query_input(message):
 
 
 def main():
-    query_input("- Choose a formatter: > ")
+    query_input("- Choose a formatter: ")
 
 
 main()
