@@ -13,8 +13,7 @@ class SumTest(StageTest):
                     lambda output:
                         '!done'
                         if 'unknown formatting type or command' in output.strip().lower()
-                        else CheckResult.wrong('In case of an unknown formatter the program should\
-                                                return the corresponding message: "Unknown formatting type or command')
+                        else CheckResult.wrong('In case of an unknown formatter the program should return the corresponding message: "Unknown formatting type or command"')
                 ]
             ),
             TestCase(
@@ -29,33 +28,27 @@ class SumTest(StageTest):
                     lambda output:
                         'ordered-list'
                         if len(output.split('\n')) == 1 and 'formatter' in output.strip().lower()
-                        else CheckResult.wrong('A user should be prompted for input again,\
-                                                i.e  "- Choose a formatter: > "'),
+                        else CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "'),
                     lambda output:
                         'unordered-list'
                         if len(output.split('\n')) == 1 and 'formatter' in output.strip().lower()
-                        else CheckResult.wrong('A user should be prompted for input again,\
-                                                i.e  "- Choose a formatter: > "'),
+                        else CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "'),
                     lambda output:
                         'link'
                         if len(output.split('\n')) == 1 and 'formatter' in output.strip().lower()
-                        else CheckResult.wrong('A user should be prompted for input again,\
-                                                i.e  "- Choose a formatter: > "'),
+                        else CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "'),
                     lambda output:
                         'inline-code'
                         if len(output.split('\n')) == 1 and 'formatter' in output.strip().lower()
-                        else CheckResult.wrong('A user should be prompted for input again,\
-                                                i.e  "- Choose a formatter: > "'),
+                        else CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "'),
                     lambda output:
                         'new-line'
                         if len(output.split('\n')) == 1 and 'formatter' in output.strip().lower()
-                        else CheckResult.wrong('A user should be prompted for input again,\
-                                                i.e  "- Choose a formatter: > "'),
+                        else CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "'),
                     lambda output:
                         '!done'
                         if len(output.split('\n')) == 1 and 'formatter' in output.strip().lower()
-                        else CheckResult.wrong('A user should be prompted for input again,\
-                                                i.e  "- Choose a formatter: > "')
+                        else CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "')
                 ]
             ),
             TestCase(
@@ -64,18 +57,15 @@ class SumTest(StageTest):
                     lambda output:
                         'bold'
                         if len(output.split('\n')) == 1 and 'formatter' in output.strip().lower()
-                        else CheckResult.wrong('A user should be prompted for input again,\
-                                                i.e  "- Choose a formatter: > "'),
+                        else CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "'),
                     lambda output:
                         'italic'
                         if len(output.split('\n')) == 1 and 'formatter' in output.strip().lower()
-                        else CheckResult.wrong('A user should be prompted for input again,\
-                                                i.e  "- Choose a formatter: > "'),
+                        else CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "'),
                     lambda output:
                         '!done'
                         if len(output.split('\n')) == 1 and 'formatter' in output.strip().lower()
-                        else CheckResult.wrong('A user should be prompted for input again,\
-                                                i.e  "- Choose a formatter: > "')
+                        else CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "')
                 ]
             )
         ]
@@ -88,8 +78,7 @@ class SumTest(StageTest):
         output = list(map(lambda item: item.lower(), output.split('\n')))
 
         if len(output) != 3:
-            return CheckResult.wrong('!help command should return the list of available formatting types, and \
-                                    the list of special commands, on separate rows, and the prompt a user for an input')
+            return CheckResult.wrong('!help command should return the list of available formatting types, and the list of special commands, on separate rows, and the prompt a user for an input')
 
         for formatter in formatters:
             if formatter not in output[0].split():

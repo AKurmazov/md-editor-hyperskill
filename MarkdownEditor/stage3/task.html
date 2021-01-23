@@ -21,8 +21,8 @@
 
 <ol>
 	<li>A user types in a formatter</li>
-	<li>If the formatter doesn't exist, the editor should print the corresponding error: <em>Unknown formatter or command. Please try again</em></li>
-	<li>The user is asked to type some input requested by the formatter: <code>&gt; Text: &lt;user's input&gt;</code> </li>
+	<li>If the formatter doesn't exist, the editor should print the corresponding error: <code>Unknown formatter or command. Please try again</code></li>
+	<li>The user is asked to type some input requested by the formatter: <code>- Text: &lt;user's input&gt;</code> </li>
 	<li>Your program saves the text with the chosen formatter applied to it and prints the whole markdown</li>
 </ol>
 
@@ -32,19 +32,19 @@
 
 <p>For <strong><em>plain</em></strong>, <strong><em>bold</em></strong>, <strong><em>italic</em></strong>, and <em><strong>inline-code,</strong> </em>only text is required</p>
 
-<pre>	<code class="language-no-highlight">-- Text: &gt; Some text</code>
+<pre>	<code>- Text: > Some text</code>
 </pre>
 
 <p>For <em><strong>header,</strong> </em>a level and text are required. Don't forget to check that the level is within the range from 1 to 6. If it violates this rule, print the corresponding error: <em>Level should be within the range from 1 to 6</em></p>
 
-<pre>	<code class="language-no-highlight">-- Level: &gt; 4
--- Text: &gt; Hello World!</code>
+<pre>	<code class="language-no-highlight">- Level: &gt; 4
+- Text: &gt; Hello World!</code>
 </pre>
 
 <p>For <strong><em>link,</em></strong> a label and a URL are required</p>
 
-<pre>	<code class="language-no-highlight">-- Label: &gt; Tutorial
--- URL: &gt; https://www.markdownguide.org/basic-syntax/</code>
+<pre>	<code class="language-no-highlight">- Label: &gt; Tutorial
+- URL: &gt; https://www.markdownguide.org/basic-syntax/</code>
 </pre>
 
 <h2>Examples</h2>
@@ -52,26 +52,28 @@
 <p>A working session with the tool might look like this after completing this stage. Notice that the <strong><em>header</em> </strong>formatter automatically adds a <em><strong>new-line</strong></em></p>
 
 <pre>	<code class="language-no-highlight">$ python markdown-editor.py
-Choose a formatter: &gt; non-existing-formatter
+- Choose a formatter: &gt; non-existing-formatter
 Unknown formatter or command. Please try again
-Choose a formatter: &gt; header
+- Choose a formatter: &gt; header
 - Level: &gt; 4
 - Text: &gt; Hello World!
 #### Hello World!
 
-Choose a formatter: &gt; plain
+- Choose a formatter: &gt; plain
 - Text: &gt; Some plain text
 #### Hello World!
 Some plain text
-Choose a formatter: &gt; new-line
+- Choose a formatter: &gt; new-line
 #### Hello World!
 Some plain text
 
-Choose a formatter: &gt; link
+- Choose a formatter: &gt; link
 - Label: &gt; Tutorial
 - URL: &gt; https://www.markdownguide.org/basic-syntax/
 #### Hello World!
 Some plain text
 [Tutorial](https://www.markdownguide.org/basic-syntax/)
-Choose a formatter: &gt; !done</code>
+- Choose a formatter: &gt; !done</code>
 </pre>
+
+<em>The greater-than symbol followed by a space (> ) represents the user input. Note that it's not part of the input.</em>

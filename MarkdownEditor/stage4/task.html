@@ -16,14 +16,14 @@
 - Row #3: &gt; Third element</code>
 </pre>
 
-<p>Don't forget to check if the number of rows is less or equal to zero! If it is invalid print the corresponding error: <em>The number of rows should be greater than zero</em></p>
+<p>Don't forget to check if the number of rows is less or equal to zero! If it is invalid print the corresponding error: <code>The number of rows should be greater than zero</code></p>
 
 <h2>Examples</h2>
 
 <p>A working session with the tool might look like this after completing this stage. Notice that the formatters automatically add a <em><strong>new-line</strong></em></p>
 
 <pre>	<code class="language-no-highlight">$ python markdown-editor.py
-Choose a formatter: &gt; ordered-list
+- Choose a formatter: &gt; ordered-list
 - Number of rows: &gt; 3
 - Row #1: &gt; First element
 - Row #2: &gt; Second element
@@ -32,7 +32,7 @@ Choose a formatter: &gt; ordered-list
 2. Second element
 3. Third element
 
-Choose a formatter: &gt; unordered-list
+- Choose a formatter: &gt; unordered-list
 - Number of rows: &gt; 2
 - Row #1: &gt; Fourth element
 - Row #2: &gt; Fifth element
@@ -42,12 +42,12 @@ Choose a formatter: &gt; unordered-list
 * Fourth element
 * Fifth element
 
-Choose a formatter: &gt; unordered-list
+- Choose a formatter: &gt; unordered-list
 - Number of rows: &gt; -2
 The number of rows should be greater than zero
-&gt;&gt; Number of rows: 2
-&gt;&gt; Row #1: Sixth element
-&gt;&gt; Row #2: Seventh element
+- Number of rows: > 2
+- Row #1: > Sixth element
+- Row #2: > Seventh element
 1. First element
 2. Second element
 3. Third element
@@ -56,7 +56,9 @@ The number of rows should be greater than zero
 * Sixth element
 * Seventh element
 
-&gt; Choose a formatter: !done</code>
+- Choose a formatter: > !done</code>
 </pre>
+
+<em>The greater-than symbol followed by a space (> ) represents the user input. Note that it's not part of the input.</em>
 
 <p>The tool should also recognize the formatters that were implemented in the previous stages, and be a modification of the code you already have</p>

@@ -16,8 +16,8 @@
 <p>I think you have already guessed that you will have to implement&nbsp;these formatters in your editor. Also, it would be cool to add some special commands to our tool.&nbsp;For instance,</p>
 
 <ul>
-	<li><em>!help</em> &mdash; prints all the available formatters</li>
-	<li><em>!done</em> &mdash; saves the markdown and exits</li>
+	<li><code>!help</code> &mdash; prints all the available formatters</li>
+	<li><code>!done</code> &mdash; saves the markdown and exits</li>
 </ul>
 
 <p>OK, let&#39;s get into coding!</p>
@@ -30,7 +30,7 @@
 
 <p>Next, let&#39;s continuously prompt a user for an input</p>
 
-<p><code>- Choose a formatter: &gt;</code></p>
+<p><code>- Choose a formatter:</code></p>
 
 <p><em>If</em> the input is</p>
 
@@ -41,7 +41,7 @@
 
 <p><em>Else if</em> the input is <em>one of the formatters (<strong>plain</strong>, <strong>bold</strong>, <strong>italic</strong>, etc.)&nbsp;&mdash; </em>the user is prompted for an input once again</p>
 
-<p><em>Otherwise &mdash;&nbsp;</em>the following error is printed:&nbsp;<em>Unknown formatter or command</em></p>
+<p><em>Otherwise &mdash;&nbsp;</em>the following error is printed:&nbsp;<code>Unknown formatting type or command</code></p>
 
 <h2>Examples</h2>
 
@@ -58,3 +58,5 @@ Special commands: !help !done
 - Choose a formatter: &gt; ordered-list
 - Choose a formatter: &gt; !done</code>
 </pre>
+
+<em>The greater-than symbol followed by a space (> ) represents the user input. Note that it's not part of the input.</em>
