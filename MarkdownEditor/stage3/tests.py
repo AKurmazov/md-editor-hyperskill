@@ -1,76 +1,22 @@
-from hstest.stage_test import StageTest
-from hstest.test_case import TestCase
-from hstest.check_result import CheckResult
+from hstest import StageTest, TestedProgram, CheckResult, dynamic_test
 
 
-class SumTest(StageTest):
+class Test(StageTest):
 
-    def generate(self):
-        return [
-            TestCase(
-                stdin=[
-                    'header',
-                    lambda output:
-                        '4'
-                        if 'level' in output.strip().lower()
-                        else CheckResult.wrong('Header formatter should prompt a user for both level and text, i.e "- Level: > "'),
-                    lambda output:
-                        'Hello World!'
-                        if 'text' in output.strip().lower()
-                        else CheckResult.wrong('Header formatter should prompt a user for both level and text, i.e "- Text: > "'),
-                    self.check_header_test1
-                ]
-            ),
-            TestCase(
-                stdin=[
-                    'plain',
-                    lambda output:
-                        'plain text'
-                        if 'text' in output.strip().lower()
-                        else CheckResult.wrong('Plain formatter should prompt a user for text, i.e "- Text: > "'),
-                    self.check_plain_test2,
-                    lambda output:
-                        'bold text'
-                        if 'text' in output.strip().lower()
-                        else CheckResult.wrong('Bold formatter should prompt a user for text, i.e "- Text: > "'),
-                    self.check_bold_test2
-                ]
-            ),
-            TestCase(
-                stdin=[
-                    'italic',
-                    lambda output:
-                        'italic text'
-                        if 'text' in output.strip().lower()
-                        else CheckResult.wrong('Italic formatter should prompt a user for text, i.e "- Text: > "'),
-                    self.check_italic_test3,
-                    lambda output:
-                        'code.work()'
-                        if 'text' in output.strip().lower()
-                        else CheckResult.wrong('Inline code formatter should prompt a user for text, i.e "- Text: > "'),
-                    self.check_inline_code_test3
-                ]
-            ),
-            TestCase(
-                stdin=[
-                    'link',
-                    lambda output:
-                        'google'
-                        if 'label' in output.strip().lower()
-                        else CheckResult.wrong('Link formatter should prompt a user for both label and URL, i.e "- Label: > "'),
-                    lambda output:
-                        'https://www.google.com'
-                        if 'url' in output.strip().lower()
-                        else CheckResult.wrong('Link formatter should prompt a user for both label and URL, i.e "- URL: > "'),
-                    self.check_link_test4,
-                    self.check_new_line_test4
-                ]
-            )
-        ]
+    @dynamic_test
+    def test1(self):
+        pr = TestedProgram()
+        pr.start()
 
-    def check_header_test1(self, output):
-        output = list(map(lambda item: item.lower(), output.split('\n')))
+        output = pr.execute('header').strip().lower()
+        if 'level' not in output:
+            return CheckResult.wrong('Header formatter should prompt a user for both level and text, i.e "- Level: > "')
 
+        output = pr.execute('4').strip().lower()
+        if 'text' not in output.strip().lower():
+            return CheckResult.wrong('Header formatter should prompt a user for both level and text, i.e "- Text: > "')
+
+        output = list(map(lambda item: item.lower(), pr.execute('Hello World!').split('\n')))
         if len(output) != 3:
             return CheckResult.wrong('Please remember that header formatter switches to a new line automatically')
 
@@ -83,11 +29,22 @@ class SumTest(StageTest):
         if 'formatter' not in output[2].strip():
             return CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "')
 
-        return '!done'
+        pr.execute('!done')
+        if not pr.is_finished():
+            return CheckResult.wrong('Your program should finish its execution whenever !done is an input')
 
-    def check_plain_test2(self, output):
-        output = list(map(lambda item: item.lower(), output.split('\n')))
+        return CheckResult.correct()
 
+    @dynamic_test
+    def test2(self):
+        pr = TestedProgram()
+        pr.start()
+
+        output = pr.execute('plain').strip().lower()
+        if 'text' not in output.strip().lower():
+            return CheckResult.wrong('Plain formatter should prompt a user for text, i.e "- Text: > "')
+
+        output = list(map(lambda item: item.lower(), pr.execute('plain text').split('\n')))
         if len(output) != 2:
             return CheckResult.wrong("Plain formatter should only return the given text as is, and prompt a user for a new formatter")
 
@@ -97,11 +54,11 @@ class SumTest(StageTest):
         if 'formatter' not in output[1].strip():
             return CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "')
 
-        return 'bold'
+        output = pr.execute('bold').strip().lower()
+        if 'text' not in output:
+            return CheckResult.wrong('Bold formatter should prompt a user for text, i.e "- Text: > "')
 
-    def check_bold_test2(self, output):
-        output = list(map(lambda item: item.lower(), output.split('\n')))
-
+        output = list(map(lambda item: item.lower(), pr.execute('bold text').split('\n')))
         if len(output) != 2:
             return CheckResult.wrong("Bold formatter should only return the given text enclosed with '**' symbols, and prompt a user for a new formatter")
 
@@ -111,22 +68,33 @@ class SumTest(StageTest):
         if 'formatter' not in output[1].strip():
             return CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "')
 
-        return '!done'
+        pr.execute('!done')
+        if not pr.is_finished():
+            return CheckResult.wrong('Your program should finish its execution whenever !done is an input')
 
-    def check_italic_test3(self, output):
-        output = list(map(lambda item: item.lower(), output.split('\n')))
+        return CheckResult.correct()
 
+    @dynamic_test
+    def test3(self):
+        pr = TestedProgram()
+        pr.start()
+
+        output = pr.execute('italic').strip().lower()
+        if 'text' not in output.strip().lower():
+            return CheckResult.wrong('Italic formatter should prompt a user for text, i.e "- Text: > "')
+
+        output = list(map(lambda item: item.lower(), pr.execute('italic text').split('\n')))
         if len(output) != 2 or output[0] != '*italic text*':
             return CheckResult.wrong("Bold formatter should only return the given text enclosed with '*' symbols, and prompt a user for a new formatter")
 
         if 'formatter' not in output[1].strip():
             return CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "')
 
-        return 'inline-code'
+        output = pr.execute('inline-code').strip().lower()
+        if 'text' not in output:
+            return CheckResult.wrong('Inline code formatter should prompt a user for text, i.e "- Text: > "')
 
-    def check_inline_code_test3(self, output):
-        output = list(map(lambda item: item.lower(), output.split('\n')))
-
+        output = list(map(lambda item: item.lower(), pr.execute('code.work()').split('\n')))
         if len(output) != 2:
             return CheckResult.wrong("Inline code formatter should only return the given text enclosed with '`' (backtick) symbols, and prompt a user for a new formatter")
 
@@ -136,11 +104,26 @@ class SumTest(StageTest):
         if 'formatter' not in output[1].strip():
             return CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "')
 
-        return '!done'
+        pr.execute('!done')
+        if not pr.is_finished():
+            return CheckResult.wrong('Your program should finish its execution whenever !done is an input')
 
-    def check_link_test4(self, output):
-        output = list(map(lambda item: item.lower(), output.split('\n')))
+        return CheckResult.correct()
 
+    @dynamic_test
+    def test4(self):
+        pr = TestedProgram()
+        pr.start()
+
+        output = pr.execute('link').strip().lower()
+        if 'label' not in output:
+            return CheckResult.wrong('Link formatter should prompt a user for both label and URL, i.e "- Label: > "')
+
+        output = pr.execute('google').strip().lower()
+        if 'url' not in output:
+            return CheckResult.wrong('Link formatter should prompt a user for both label and URL, i.e "- URL: > "')
+
+        output = list(map(lambda item: item.lower(), pr.execute('https://www.google.com').split('\n')))
         if len(output) != 2:
             return CheckResult.wrong('Link code formatter should only return the given label associated with a URL in the form [Label](URL), and prompt a user for a new formatter')
 
@@ -150,11 +133,7 @@ class SumTest(StageTest):
         if 'formatter' not in output[1].strip():
             return CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "')
 
-        return 'new-line'
-
-    def check_new_line_test4(self, output):
-        output = list(map(lambda item: item.lower(), output.split('\n')))
-
+        output = list(map(lambda item: item.lower(), pr.execute('new-line').split('\n')))
         if len(output) != 3 or output[1] != '':
             return CheckResult.wrong('New-line formatter only moves the input pointer to the next line, and prompts a user for a new formatter')
 
@@ -164,11 +143,12 @@ class SumTest(StageTest):
         if 'formatter' not in output[2].strip():
             return CheckResult.wrong('A user should be prompted for input again, i.e  "- Choose a formatter: > "')
 
-        return '!done'
+        pr.execute('!done')
+        if not pr.is_finished():
+            return CheckResult.wrong('Your program should finish its execution whenever !done is an input')
 
-    def check(self, reply, attach):
         return CheckResult.correct()
 
 
 if __name__ == '__main__':
-    SumTest('markdown_editor.editor').run_tests()
+    Test().run_tests()

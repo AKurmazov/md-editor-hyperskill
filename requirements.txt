@@ -1,1 +1,1 @@
-hs-test-python==3.0.0
+hs-test-python==4.0.0
